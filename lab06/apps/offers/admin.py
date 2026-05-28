@@ -6,15 +6,24 @@ from apps.offers.models.Offer import Offer
 from apps.offers.models.OfferTechnology import OfferTechnology
 from apps.offers.models.Recruiter import Recruiter
 from apps.offers.models.Technology import Technology
-from apps.offers.models.User import User
 from django.contrib import admin
 
-admin.site.register(User)
-admin.site.register(Candidate)
-admin.site.register(Recruiter)
-admin.site.register(Company)
-admin.site.register(Offer)
-admin.site.register(Technology)
-admin.site.register(Application)
+
+class BaseAdmin(admin.ModelAdmin):  # type: ignore
+  readonly_fields = ['created_id', 'modified_id', 'created', 'modified']
+
+  def save_model(self, request, obj, form, change):  # type: ignore
+    if not change:
+      obj.created_id = request.user
+    obj.modified_id = request.user
+    super().save_model(request, obj, form, change)  # type: ignore
+
+
+admin.site.register(Candidate, BaseAdmin)
+admin.site.register(Recruiter, BaseAdmin)
+admin.site.register(Company, BaseAdmin)
+admin.site.register(Offer, BaseAdmin)
+admin.site.register(Technology, BaseAdmin)
+admin.site.register(Application, BaseAdmin)
 admin.site.register(CandidateTechnology)
 admin.site.register(OfferTechnology)
