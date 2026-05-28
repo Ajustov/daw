@@ -9,8 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-import os        
-import sys        
+import os
 from pathlib import Path
 
 graphviz_path = r"C:\Program Files\Graphviz\bin"
@@ -32,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = 'offers.User'
 # Application definition
 
 INSTALLED_APPS = [
