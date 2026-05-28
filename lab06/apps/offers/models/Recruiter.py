@@ -1,13 +1,8 @@
 import uuid
 
+from apps.offers.models.validators import validate_description_length
 from devjobs import settings
-from django.core.exceptions import ValidationError
 from django.db import models
-
-
-def validate_description_length(value: str) -> None:
-  if len(value) > 500:
-    raise ValidationError('La descripción no puede superar 500 caracteres')
 
 
 class Recruiter(models.Model):
@@ -16,7 +11,9 @@ class Recruiter(models.Model):
     settings.AUTH_USER_MODEL, on_delete=models.PROTECT, unique=True
   )
   company_id = models.ForeignKey('Company', on_delete=models.PROTECT)  # type: ignore
-  description = models.TextField(null=True, validators=[validate_description_length])
+  description = models.TextField(
+    null=True, validators=[validate_description_length]
+  )
   status = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True)
   created_id = models.ForeignKey(

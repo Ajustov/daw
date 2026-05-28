@@ -1,19 +1,16 @@
 import uuid
 from typing import Iterable
 
+from apps.offers.models.validators import validate_technology_name
 from devjobs import settings
-from django.core.exceptions import ValidationError
 from django.db import models
-
-
-def validate_technology_name(value: str) -> None:
-  if not value.strip():
-    raise ValidationError('El nombre no puede estar vacío o ser espacios')
 
 
 class Technology(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  name = models.CharField(max_length=100, unique=True)
+  name = models.CharField(
+    max_length=100, unique=True, validators=[validate_technology_name]
+  )
   status = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True)
   created_id = models.ForeignKey(
