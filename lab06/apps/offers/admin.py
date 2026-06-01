@@ -6,6 +6,7 @@ from apps.offers.models.Offer import Offer
 from apps.offers.models.OfferTechnology import OfferTechnology
 from apps.offers.models.Recruiter import Recruiter
 from apps.offers.models.Technology import Technology
+from apps.offers.models.User import User
 from django.contrib import admin
 
 
@@ -19,6 +20,7 @@ class BaseAdmin(admin.ModelAdmin):  # type: ignore
     super().save_model(request, obj, form, change)  # type: ignore
 
 
+admin.site.register(User, BaseAdmin)
 admin.site.register(Candidate, BaseAdmin)
 admin.site.register(Recruiter, BaseAdmin)
 admin.site.register(Company, BaseAdmin)
