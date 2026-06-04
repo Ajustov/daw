@@ -24,8 +24,8 @@ urlpatterns = [
     # URLS COMUNES
     path('candidatos/<uuid:candidate_id>/editar/', views.editar_perfil_candidato, name='editar_perfil_candidato'),
     
-    path('dashboard/<int:user_id>/', views.dashboard, name='dashboard'),
-
+    path('dashboard/<uuid:user_id>/', views.dashboard, name='dashboard'),
+    
     # NUEVAS RUTAS SISTEMA DE AUTENTICACIÓN
     path('auth/registro/candidato/', views.registro_candidato, name='registro_candidato'),
 

@@ -12,17 +12,23 @@ from django.core.exceptions import ValidationError
 def lista_ofertas(request):
     """
     Muestra todas las ofertas de trabajo activas.
-    Permite filtrar opcionalmente por modalidad usando la URL (ej: /ofertas/?modality=remote)
+    Permite filtros combinados por modalidad, palabras clave en el título y ubicación.
     """
-    # Empezamos trayendo solo las ofertas que tengan status=True (activas)
     ofertas = Offer.objects.filter(status=True)
     
-    # Ejemplo de filtro básico por Query Params
+    # Captura de Query Params
     modalidad_filtro = request.GET.get('modality', None)
+    titulo_filtro = request.GET.get('title', None)
+    ubicacion_filtro = request.GET.get('location', None)
+    
+    # Aplicación de filtros encadenados
     if modalidad_filtro:
         ofertas = ofertas.filter(modality=modalidad_filtro)
+    if titulo_filtro:
+        ofertas = ofertas.filter(title__icontains=titulo_filtro)
+    if ubicacion_filtro:
+        ofertas = ofertas.filter(location__icontains=ubicacion_filtro)
         
-    # Convertimos los objetos de la base de datos a una lista de diccionarios
     data = []
     for oferta in ofertas:
         data.append({
@@ -36,18 +42,26 @@ def lista_ofertas(request):
         
     return JsonResponse({'offers': data}, safe=False)
 
-
 def ver_detalle_oferta(request, offer_id):
     """
     Busca una oferta específica por su ID, muestra su descripción 
-    y lista las tecnologías asociadas a ella usando OfferTechnology.
+    y lista las tecnologías asociadas de forma segura y eficiente.
     """
+    # Buscar la oferta o lanzar un 404 si el UUID no existe
     oferta = get_object_or_404(Offer, id=offer_id)
     
-    # Buscamos en la tabla intermedia 'OfferTechnology' las tecnologías de esta oferta
+    # Traer los registros de la tabla intermedia para esta oferta
     tecnologias_vinculadas = OfferTechnology.objects.filter(offer_id=oferta)
-    lista_tecnologias = [vinculo.technology_id.name for vinculo in tecnologias_vinculadas]
     
+    # Extraer los UUIDs. Debido al nombre del campo, 'vinculo.technology_id' entrega el UUID directo.
+    tech_uuids = [vinculo.technology_id for vinculo in tecnologias_vinculadas]
+    
+    # Consultar directamente al modelo Technology usando los UUIDs en una sola consulta masiva
+    lista_tecnologias = list(
+        Technology.objects.filter(id__in=tech_uuids).values_list('name', flat=True)
+    )
+    
+    # Construir y retornar la respuesta JSON
     data = {
         'id': str(oferta.id),
         'title': oferta.title,
@@ -56,7 +70,7 @@ def ver_detalle_oferta(request, offer_id):
         'modality': oferta.modality,
         'seniority': oferta.seniority,
         'salary': str(oferta.salary) if oferta.salary else "No especificado",
-        'required_technologies': lista_tecnologias
+        'required_technologies': lista_tecnologias  # Ahora devolverá un array limpio de strings ['PYTHON', 'REACT']
     }
     return JsonResponse(data)
 
@@ -467,39 +481,6 @@ def vincular_tecnologias_oferta(request, offer_id):
         return JsonResponse({'error': 'JSON inválido'}, status=400)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
-
-def lista_ofertas(request):
-    """
-    Muestra todas las ofertas de trabajo activas.
-    Permite filtros combinados por modalidad, palabras clave en el título y ubicación.
-    """
-    ofertas = Offer.objects.filter(status=True)
-    
-    # Captura de Query Params
-    modalidad_filtro = request.GET.get('modality', None)
-    titulo_filtro = request.GET.get('title', None)
-    ubicacion_filtro = request.GET.get('location', None)
-    
-    # Aplicación de filtros encadenados
-    if modalidad_filtro:
-        ofertas = ofertas.filter(modality=modalidad_filtro)
-    if titulo_filtro:
-        ofertas = ofertas.filter(title__icontains=titulo_filtro)
-    if ubicacion_filtro:
-        ofertas = ofertas.filter(location__icontains=ubicacion_filtro)
-        
-    data = []
-    for oferta in ofertas:
-        data.append({
-            'id': str(oferta.id),
-            'title': oferta.title,
-            'location': oferta.location,
-            'modality': oferta.modality,
-            'seniority': oferta.seniority,
-            'salary': str(oferta.salary) if oferta.salary else "No especificado"
-        })
-        
-    return JsonResponse({'offers': data}, safe=False)
 
 def descargar_cv(request, candidate_id):
     """
