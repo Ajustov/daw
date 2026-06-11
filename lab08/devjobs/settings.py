@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     # Aplicaciones Locales
     'apps.offers',
+    #swager
+    'drf_spectacular',
 ]
 
 # Configuración de usuario personalizada (ya la tienes, pero verifícala)
@@ -132,3 +134,6 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
