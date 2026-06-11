@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
   # Los atributos que ya vienen por defecto
+  # username
   first_name = models.CharField(_('first name'), max_length=150, blank=True)
   last_name = models.CharField(_('last name'), max_length=150, blank=True)
   # email
@@ -17,13 +18,14 @@ class User(AbstractUser):
   # last_login
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   # status, no está porque lo reemplaza is_active
-  created = models.DateTimeField(auto_now_add=True)
+  # date_joined, es lo mismo que created
   created_id = models.ForeignKey(
-    'self', 
-    null=True, 
-    on_delete=models.PROTECT, 
+    'self',
+    null=True,
+    on_delete=models.PROTECT,
     blank=True,
-    related_name='+'
+    related_name='+',
+    db_column='created_id',
   )
   modified = models.DateTimeField(auto_now=True)
   modified_id = models.ForeignKey(
@@ -32,6 +34,7 @@ class User(AbstractUser):
     on_delete=models.PROTECT,
     blank=True,
     related_name='+',
+    db_column='modified_id',
   )
 
   # Heredamos su __str__
@@ -43,9 +46,9 @@ class User(AbstractUser):
       )
     ]
 
-  def save(self, *args, **kwargs) -> None:  # type: ignore
+  def save(self, *args, **kwargs) -> None:
     if self.first_name:
       self.first_name = self.first_name.strip().upper()
     if self.last_name:
       self.last_name = self.last_name.strip().upper()
-    super().save(*args, **kwargs)  # type: ignore
+    super().save(*args, **kwargs)

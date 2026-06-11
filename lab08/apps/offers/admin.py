@@ -10,14 +10,14 @@ from apps.offers.models.User import User
 from django.contrib import admin
 
 
-class BaseAdmin(admin.ModelAdmin):  # type: ignore
+class BaseAdmin(admin.ModelAdmin):
   readonly_fields = ['created_id', 'modified_id', 'created', 'modified']
 
-  def save_model(self, request, obj, form, change):  # type: ignore
+  def save_model(self, request, obj, form, change):
     if not change:
       obj.created_id = request.user
     obj.modified_id = request.user
-    super().save_model(request, obj, form, change)  # type: ignore
+    super().save_model(request, obj, form, change)
 
 
 admin.site.register(User, BaseAdmin)

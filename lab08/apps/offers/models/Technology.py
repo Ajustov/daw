@@ -16,8 +16,9 @@ class Technology(models.Model):
   created_id = models.ForeignKey(
     settings.AUTH_USER_MODEL,
     null=True,
-    on_delete=models.PROTECT,
+    on_delete=models.PROTECT, 
     related_name='+',
+    db_column='created_id',
   )
   modified = models.DateTimeField(auto_now=True)
   modified_id = models.ForeignKey(
@@ -25,6 +26,7 @@ class Technology(models.Model):
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
+    db_column='modified_id',
   )
 
   class Meta:

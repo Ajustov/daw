@@ -7,8 +7,8 @@ from django.db import models
 
 class Company(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  user_id = models.ForeignKey(  # type: ignore
-    settings.AUTH_USER_MODEL, on_delete=models.PROTECT
+  user_id = models.ForeignKey(
+    settings.AUTH_USER_MODEL, on_delete=models.PROTECT, db_column='user_id'
   )
   name = models.CharField(max_length=255)
   status = models.BooleanField(default=True)
@@ -18,6 +18,7 @@ class Company(models.Model):
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
+    db_column='created_id',
   )
   modified = models.DateTimeField(auto_now=True)
   modified_id = models.ForeignKey(
@@ -25,6 +26,7 @@ class Company(models.Model):
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
+    db_column='modified_id',
   )
 
   class Meta:

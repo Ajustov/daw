@@ -1,26 +1,31 @@
-from rest_framework import serializers
-
 from ..models.Recruiter import Recruiter
+from .UserSerializer import (
+  UserCreateSerializer,
+  UserResponseSerializer,
+  UserUpdateSerializer,
+)
 
 
-class RecruiterCreateSerializer(serializers.ModelSerializer[Recruiter]):
-  class Meta:
+class RecruiterCreateSerializer(UserCreateSerializer):
+  class Meta(UserCreateSerializer.Meta):
     model = Recruiter
+    fields = UserCreateSerializer.Meta.fields + [
+      'description',
+    ]
 
-    fields = ['description']
 
-
-class RecruiterResponseSerializer(serializers.ModelSerializer[Recruiter]):
-  class Meta:
+class RecruiterResponseSerializer(UserResponseSerializer):
+  class Meta(UserResponseSerializer.Meta):
     model = Recruiter
+    fields = UserResponseSerializer.Meta.fields + [
+      'company_id',
+      'description',
+    ]
 
-    fields = ['id', 'company_id', 'description']
 
-    read_only_fields = ['id', 'company_id', 'description']
-
-
-class RecruiterUpdateSerializer(serializers.ModelSerializer[Recruiter]):
-  class Meta:
+class RecruiterUpdateSerializer(UserUpdateSerializer):
+  class Meta(UserUpdateSerializer.Meta):
     model = Recruiter
-
-    fields = ['description']
+    fields = UserUpdateSerializer.Meta.fields + [
+      'description',
+    ]

@@ -5,7 +5,7 @@ from apps.offers.models.enums import Seniority
 from devjobs import settings
 from django.db import models
 
- 
+
 class Modality(models.TextChoices):
   REMOTE = 'remote'
   PRESENTIAL = 'presential'
@@ -14,7 +14,12 @@ class Modality(models.TextChoices):
 
 class Offer(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  recruiter_id = models.UUIDField()
+  recruiter_id = models.ForeignKey(
+    'Recruiter',
+    on_delete=models.PROTECT,
+    related_name='+',
+    db_column='recruiter_id',
+  )
   title = models.CharField(max_length=255)
   description = models.TextField()
   location = models.CharField(max_length=255)
@@ -27,6 +32,7 @@ class Offer(models.Model):
     settings.AUTH_USER_MODEL,
     on_delete=models.PROTECT,
     related_name='+',
+    db_column='cretead_id',
   )
   modified = models.DateTimeField(auto_now=True)
   modified_id = models.ForeignKey(
@@ -34,7 +40,14 @@ class Offer(models.Model):
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
+    db_column='modified_id',
   )
+
+  class Meta:
+    db_table = 'offers'
+
+  def __str__(self) -> str:
+    return f'{self.title} - {self.location}'
 
   def save(
     self,
@@ -46,6 +59,3 @@ class Offer(models.Model):
     self.title = self.title.strip().upper()
     self.location = self.location.strip().upper()
     super().save(force_insert, force_update, using, update_fields)
-
-  def __str__(self) -> str:
-    return f'{self.title} - {self.location}'
