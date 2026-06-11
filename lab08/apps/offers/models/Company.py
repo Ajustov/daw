@@ -1,5 +1,5 @@
-from typing import Iterable
 import uuid
+from typing import Iterable
 
 from devjobs import settings
 from django.db import models
@@ -7,12 +7,10 @@ from django.db import models
 
 class Company(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  user = models.ForeignKey(
-    settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='companies'
+  user_id = models.ForeignKey(  # type: ignore
+    settings.AUTH_USER_MODEL, on_delete=models.PROTECT
   )
   name = models.CharField(max_length=255)
-  website = models.URLField(max_length=500, null=True, blank=True)
-  description = models.TextField(null=True, blank=True)
   status = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True)
   created_id = models.ForeignKey(

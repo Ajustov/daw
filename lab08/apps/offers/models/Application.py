@@ -13,10 +13,10 @@ class Status(models.TextChoices):
 
 class Application(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  offer = models.ForeignKey('Offer', on_delete=models.PROTECT, related_name='applications')
-  candidate = models.ForeignKey('Candidate', on_delete=models.PROTECT, related_name='applications')
-  recruiter = models.ForeignKey(
-    'Recruiter', null=True, on_delete=models.PROTECT, related_name='managed_applications'
+  offer_id = models.ForeignKey('Offer', on_delete=models.PROTECT)  # type: ignore
+  candidate_id = models.ForeignKey('Candidate', on_delete=models.PROTECT)  # type: ignore
+  recruiter_id = models.ForeignKey(
+    'Recruiter', null=True, on_delete=models.PROTECT, related_name='+'
   )
   status = models.CharField(
     max_length=8, choices=Status.choices, default=Status.PENDING
@@ -39,4 +39,4 @@ class Application(models.Model):
     db_table = 'applications'
 
   def __str__(self) -> str:
-    return f'{self.candidate} - {self.offer} - {self.status}'
+    return f'{self.candidate_id} - {self.offer_id} - {self.status}'  # type: ignore
