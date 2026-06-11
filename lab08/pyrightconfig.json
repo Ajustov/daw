@@ -1,3 +1,4 @@
 {
-    "reportMissingTypeArgument": "none"
+    "reportMissingTypeArgument": "none",
+    "reportIncompatibleVariableOverride": "none"
 }
