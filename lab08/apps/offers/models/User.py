@@ -19,22 +19,12 @@ class User(AbstractUser):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   # status, no está porque lo reemplaza is_active
   # date_joined, es lo mismo que created
-  created_id = models.ForeignKey(
-    'self',
-    null=True,
-    on_delete=models.PROTECT,
-    blank=True,
-    related_name='+',
-    db_column='created_id',
+  creator = models.ForeignKey(
+    'self', null=True, on_delete=models.PROTECT, blank=True, related_name='+'
   )
   modified = models.DateTimeField(auto_now=True)
-  modified_id = models.ForeignKey(
-    'self',
-    null=True,
-    on_delete=models.PROTECT,
-    blank=True,
-    related_name='+',
-    db_column='modified_id',
+  modifier = models.ForeignKey(
+    'self', null=True, on_delete=models.PROTECT, blank=True, related_name='+'
   )
 
   # Heredamos su __str__

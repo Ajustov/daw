@@ -11,12 +11,12 @@ from django.contrib import admin
 
 
 class BaseAdmin(admin.ModelAdmin):
-  readonly_fields = ['created_id', 'modified_id', 'created', 'modified']
+  readonly_fields = ['creator', 'modifier', 'created', 'modified']
 
   def save_model(self, request, obj, form, change):
     if not change:
-      obj.created_id = request.user
-    obj.modified_id = request.user
+      obj.creator = request.user
+    obj.modifier = request.user
     super().save_model(request, obj, form, change)
 
 

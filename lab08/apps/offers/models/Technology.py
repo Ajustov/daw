@@ -13,20 +13,18 @@ class Technology(models.Model):
   )
   status = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True)
-  created_id = models.ForeignKey(
-    settings.AUTH_USER_MODEL,
-    null=True,
-    on_delete=models.PROTECT, 
-    related_name='+',
-    db_column='created_id',
-  )
-  modified = models.DateTimeField(auto_now=True)
-  modified_id = models.ForeignKey(
+  creator = models.ForeignKey(
     settings.AUTH_USER_MODEL,
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
-    db_column='modified_id',
+  )
+  modified = models.DateTimeField(auto_now=True)
+  modifier = models.ForeignKey(
+    settings.AUTH_USER_MODEL,
+    null=True,
+    on_delete=models.PROTECT,
+    related_name='+',
   )
 
   class Meta:

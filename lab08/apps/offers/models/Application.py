@@ -13,40 +13,28 @@ class Status(models.TextChoices):
 
 class Application(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  offer_id = models.ForeignKey(
-    'Offer', on_delete=models.PROTECT, db_column='offer_id'
-  )
-  candidate_id = models.ForeignKey(
-    'Candidate', on_delete=models.PROTECT, db_column='candidate_id'
-  )
-  recruiter_id = models.ForeignKey(
-    'Recruiter',
-    null=True,
-    on_delete=models.PROTECT,
-    related_name='+',
-    db_column='recruiter_id',
+  offer = models.ForeignKey('Offer', on_delete=models.PROTECT)
+  candidate = models.ForeignKey('Candidate', on_delete=models.PROTECT)
+  recruiter = models.ForeignKey(
+    'Recruiter', null=True, on_delete=models.PROTECT, related_name='+'
   )
   status = models.CharField(
     max_length=8, choices=Status.choices, default=Status.PENDING
   )
   created = models.DateTimeField(auto_now_add=True)
-  created_id = models.ForeignKey(
-    settings.AUTH_USER_MODEL,
-    on_delete=models.PROTECT,
-    related_name='+',
-    db_column='created_id',
+  creator = models.ForeignKey(
+    settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='+'
   )
   modified = models.DateTimeField(auto_now=True)
-  modified_id = models.ForeignKey(
+  modifier = models.ForeignKey(
     settings.AUTH_USER_MODEL,
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
-    db_column='modified_id',
   )
 
   class Meta:
     db_table = 'applications'
 
   def __str__(self) -> str:
-    return f'{self.candidate_id} - {self.offer_id} - {self.status}'
+    return f'{self.candidate} - {self.offer} - {self.status}'

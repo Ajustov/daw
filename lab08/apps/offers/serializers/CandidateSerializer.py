@@ -14,7 +14,7 @@ class CandidateCreateSerializer(UserCreateSerializer):
       'description',
       'cv',
       'seniority',
-      'experienceYears',
+      'experience_years',
     ]
 
 
@@ -26,7 +26,7 @@ class CandidateResponseSerializer(UserResponseSerializer):
       'description',
       'cv',
       'seniority',
-      'experienceYears',
+      'experience_years',
     ]
 
 
@@ -37,7 +37,7 @@ class CandidatePublicResponseSerializer(UserPublicResponseSerializer):
       'id',
       'description',
       'seniority',
-      'experienceYears',
+      'experience_years',
     ]
 
 
@@ -48,5 +48,5 @@ class CandidateUpdateSerializer(UserUpdateSerializer):
       'description',
       'cv',
       'seniority',
-      'experienceYears',
+      'experience_years',
     ]

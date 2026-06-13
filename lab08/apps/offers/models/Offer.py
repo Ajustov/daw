@@ -14,11 +14,8 @@ class Modality(models.TextChoices):
 
 class Offer(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  recruiter_id = models.ForeignKey(
-    'Recruiter',
-    on_delete=models.PROTECT,
-    related_name='+',
-    db_column='recruiter_id',
+  recruiter = models.ForeignKey(
+    'Recruiter', on_delete=models.PROTECT, related_name='+'
   )
   title = models.CharField(max_length=255)
   description = models.TextField()
@@ -28,19 +25,15 @@ class Offer(models.Model):
   status = models.BooleanField(default=True)
   salary = models.DecimalField(max_digits=10, decimal_places=2, null=True)
   created = models.DateTimeField(auto_now_add=True)
-  created_id = models.ForeignKey(  # type: ignore
-    settings.AUTH_USER_MODEL,
-    on_delete=models.PROTECT,
-    related_name='+',
-    db_column='cretead_id',
+  creator = models.ForeignKey(
+    settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='+'
   )
   modified = models.DateTimeField(auto_now=True)
-  modified_id = models.ForeignKey(
+  modifier = models.ForeignKey(
     settings.AUTH_USER_MODEL,
     null=True,
     on_delete=models.PROTECT,
     related_name='+',
-    db_column='modified_id',
   )
 
   class Meta:

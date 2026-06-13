@@ -11,61 +11,61 @@ last_login
 id
 date_joined (created)
 modified
-create_id
-modified_id
+creator
+modifier
 
 
 candidates
 id
-user_id
+user
 description
 cv
 seniority
-experienceYears
+experience_years
 status
 created
 modified
-created_id
-modified_id
+creator
+modifier
 
 
 recruiters
 id
-user_id
+user
 description
 status
 created
 modified
-created_id
-modified_id
+creator
+modifier
 
 
 applications
 id
-offer_id
-candidate_id
-recruiter_id
+offer
+candidate
+recruiter
 status
 created
 modified
-created_id
-modified_id
+creator
+modifier
 
 
 companies
 id
-user_id
+user
 name
 status
 created
 modified
-created_id
-modified_id
+creator
+modifier
 
 
 offers
 id
-recruiter_id
+recruiter
 title
 description
 location
@@ -75,8 +75,8 @@ status
 salary
 created
 modified
-created_id
-modified_id
+creator
+modifier
 
 
 technologies
@@ -85,5 +85,5 @@ name
 status
 created
 modified
-created_id
-modified_id
+creator
+modifier
