@@ -1,0 +1,47 @@
+from apps.jobs.api.permissions import CandidateAuth
+from apps.jobs.schemas.candidate import (
+  CandidateCreate,
+  CandidateResponsePrivate,
+  CandidateUpdate,
+)
+from apps.jobs.services.candidate_service import candidate_service
+from django.db import IntegrityError
+from ninja import Router
+from ninja.errors import HttpError
+from ninja_jwt.authentication import JWTAuth
+
+router_candidates = Router(tags=['Candidates'])
+
+
+@router_candidates.get(
+  '/me', auth=CandidateAuth(), response=CandidateResponsePrivate
+)
+def get_me(request):
+  return request.auth
+
+
+@router_candidates.post(
+  '/', auth=JWTAuth(), response={201: CandidateResponsePrivate}
+)
+def create(request, candidate: CandidateCreate):
+  try:
+    return candidate_service.create(request.user.id, candidate)
+  except (ValueError, IntegrityError) as e:
+    raise HttpError(409, str(e))
+
+
+@router_candidates.patch(
+  '/', auth=CandidateAuth(), response=CandidateResponsePrivate
+)
+def patch(request, candidate: CandidateUpdate):
+  try:
+    return candidate_service.patch(request.auth, candidate)
+  except IntegrityError as e:
+    raise HttpError(409, str(e))
+
+
+@router_candidates.delete(
+  '/', auth=CandidateAuth(), response=CandidateResponsePrivate
+)
+def deactivate(request):
+  return candidate_service.deactivate(request.auth)

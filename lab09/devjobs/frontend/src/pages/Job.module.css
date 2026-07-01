@@ -1,0 +1,102 @@
+.mainJob {
+  max-width: 1000px;
+  margin: auto;
+  padding: 3rem 2rem;
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: start;
+    padding-bottom: 2rem;
+    a, .breadcrumbSeparacion {
+      text-decoration: none;
+      color: #fff8;
+    }
+    .breadcrumbActual {
+      color: #fffe;
+    }
+  }
+  article {
+    padding: 2rem;
+    background-color: #111825;
+    border-radius: 10px;
+    header {
+      padding-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .column1 > h1 {
+        padding-bottom: 0.3rem;
+        font-size: 2.5rem;
+      }
+      .column1 > p {
+        color: #fff8;
+        font-size: 1.2rem;
+      }
+      .column2 {
+        display: flex;
+        gap: .9rem;
+      }
+      button {
+      border: none;
+      padding: 0.7rem 1.2rem;
+      color: #fff;
+      background-color: var(--celeste-clarito);
+      font-weight: 500;
+      border-radius: 10px;
+        &:hover {
+          background-color: color-mix(in srgb, var(--celeste-clarito) 70%,transparent);
+        }
+        &.clickeado {
+        background-color: #4a5;
+        pointer-events: none;
+        opacity: 0.6;
+        }
+        &:disabled {
+          opacity: .7;
+          pointer-events: none;
+        }
+      }
+    }
+    section {
+      padding-bottom: 2rem;
+      h2 {
+        padding-bottom: 1.5rem;
+        font-size: 1.6rem;
+      }
+      div {
+        line-height: 1.6rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    } 
+  }
+}
+
+.loading,
+.error {
+  padding-block: 5rem;
+  text-align: center;
+}
+
+.loadingText {
+  color: var(--text-muted);
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.errorBtn {
+  border: none;
+  padding: 0.7rem 1.2rem;
+  color: #fff;
+  background-color: var(--celeste-clarito);
+  font-weight: 500;
+  border-radius: 10px;
+  &:hover{
+    background-color: color-mix(in srgb, var(--celeste-clarito) 70%,transparent);
+  }
+}
