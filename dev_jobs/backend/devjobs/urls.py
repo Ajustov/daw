@@ -12,6 +12,8 @@ from django.urls import path
 from ninja_extra import NinjaExtraAPI
 from ninja_jwt.controller import NinjaJWTDefaultController
 
+from apps.jobs.views import welcome_view
+
 api = NinjaExtraAPI()
 # Agregamos los endpoints de ninja-extra que depende de ninja-jwt
 api.register_controllers(NinjaJWTDefaultController)
@@ -25,4 +27,7 @@ api.add_router('/offers', router_offers)
 api.add_router('/applications', router_applications)
 api.add_router('/locations', router_locations)
 
-urlpatterns = [path('admin/', admin.site.urls), path('api/', api.urls)]
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', welcome_view, name='welcome'),  # Ruta raíz
+]
