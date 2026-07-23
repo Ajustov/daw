@@ -1,0 +1,16 @@
+node_modules
+.vite
+# Logs
+*.log
+pnpm-debug.log*
+
+# Vite
+dist
+dist-ssr
+
+# Variables de entorno locales
+*.local
+.env
+.vscode
+skills-lock.json
+.agents
