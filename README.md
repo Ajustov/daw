@@ -28,10 +28,10 @@ Todo el ecosistema está respaldado por estándares de alta seguridad, implement
 | **Entregable** | **Enlace** |
 |----------------|------------|
 | Frontend Deploy | <https://devjobs-frontend-0r4h.onrender.com> |
-| Backend Deploy (API REST) | <https://devjobs-backend-ovi4.onrender.com> |
+| Backend Deploy | <https://devjobs-backend-ovi4.onrender.com> |
 | Documentación API (Swagger/OpenAPI) | <https://devjobs-backend-ovi4.onrender.com/api/docs> |
 | Informe Final | <https://drive.google.com/file/d/1c408lOlv9dmLFeD_AQ39-PEE5qyjAvOM/view?usp=drive_link> |
-| Poster DevJobs | <https://drive.google.com/file/d/1L74ktfx-Sobwt0JZjCjLgYvVhgKlyXH-/view?usp=drive_link> |
+| Poster DevJobs | <https://drive.google.com/file/d/1Mj-_U8BiR8F5j6NdpZQn7eiDNafzJzIJ/view?usp=sharing> |
 
 ---
 
