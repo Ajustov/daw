@@ -1,3 +1,5 @@
+from turtle import home
+
 from apps.jobs.api.endpoints.applications import router_applications
 from apps.jobs.api.endpoints.auth import router_auth
 from apps.jobs.api.endpoints.candidates import router_candidates
@@ -11,8 +13,6 @@ from django.contrib import admin
 from django.urls import path
 from ninja_extra import NinjaExtraAPI
 from ninja_jwt.controller import NinjaJWTDefaultController
-
-from apps.jobs.views import welcome_view
 
 api = NinjaExtraAPI()
 # Agregamos los endpoints de ninja-extra que depende de ninja-jwt
@@ -28,6 +28,7 @@ api.add_router('/applications', router_applications)
 api.add_router('/locations', router_locations)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', welcome_view, name='welcome'),  # Ruta raíz
+  path('', home),
+  path('admin/', admin.site.urls),
+  path('api/', api.urls),
 ]

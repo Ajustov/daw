@@ -25,23 +25,13 @@ Todo el ecosistema está respaldado por estándares de alta seguridad, implement
 
 # Entregables
 
-| Entregable | URL |
-|---|---|
-| Frontend Deploy | https://devjobs-frontend-0r4h.onrender.com |
-| Backend Deploy (API REST) | https://devjobs-backend-ovi4.onrender.com |
-| Documentación API (Swagger/OpenAPI) | https://devjobs-backend-ovi4.onrender.com/api/docs |
-| **Informes** | |
-| Lab01 — [Desplegar entornos Web con Docker] | [https://drive.google.com/file/d/1PyOZo1wE7IJ-OsK2ZQZt800eOKF8nqpm/view?usp=drive_link] |
-| Lab02 — [Javascript en el Cliente] | [https://drive.google.com/file/d/1xvuk0J0Psgvsru9WACGiL-xRs5jMjNLj/view?usp=drive_link] |
-| Lab03 — [JavaScript Backend] | [https://drive.google.com/file/d/1QaD0wl9H9NCCh6XDf1KbTq05OBt0E83C/view?usp=drive_link] |
-| Lab04 — [Título del Laboratorio 04] | [link_lab04] |
-| Lab05 — [Base de Datos] | [https://drive.google.com/file/d/1OTk7Mg52WbBPxUt031iOeHrSvSJUR2uh/view?usp=drive_link] |
-| Lab06 — [Título del Laboratorio 06] | [link_lab06] |
-| Lab07 — [Implementación del Views] | [https://drive.google.com/file/d/1FzaNj2dh2MsPWqiAyO0tSUqviB3RgMN6/view?usp=drive_link] |
-| Lab08 — [Django Admin] | [https://drive.google.com/file/d/1Vtt2_XuLCj7ZPL8POWdBQMeY3KsDlb78/view?usp=drive_link] |
-| Lab09 — [Frontend React+Vite] | [https://drive.google.com/file/d/1j6ID0h2Y1wKMi3tpLz-M_coB-7_mQhMt/view?usp=drive_link] |
-| Informe Final | [https://drive.google.com/file/d/1c408lOlv9dmLFeD_AQ39-PEE5qyjAvOM/view?usp=drive_link] |
-| Poster DevJobs | [https://drive.google.com/file/d/1L74ktfx-Sobwt0JZjCjLgYvVhgKlyXH-/view?usp=drive_link] |
+| **Entregable** | **Enlace** |
+|----------------|------------|
+| Frontend Deploy | <https://devjobs-frontend-0r4h.onrender.com> |
+| Backend Deploy (API REST) | <https://devjobs-backend-ovi4.onrender.com> |
+| Documentación API (Swagger/OpenAPI) | <https://devjobs-backend-ovi4.onrender.com/api/docs> |
+| Informe Final | <https://drive.google.com/file/d/1c408lOlv9dmLFeD_AQ39-PEE5qyjAvOM/view?usp=drive_link> |
+| Poster DevJobs | <https://drive.google.com/file/d/1L74ktfx-Sobwt0JZjCjLgYvVhgKlyXH-/view?usp=drive_link> |
 
 ---
 

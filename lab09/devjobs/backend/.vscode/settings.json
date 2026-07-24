@@ -1,7 +1,0 @@
-{
-  "workbench.colorTheme": "Catppuccin Frappé",
-  "python.analysis.packageIndexDepths": [
-    { "name": "django", "depth": 3 },
-    { "name": "pydantic", "depth": 3 }
-  ]
-}

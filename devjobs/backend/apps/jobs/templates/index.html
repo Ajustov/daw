@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevJobs — Plataforma de Empleo para Desarrolladores</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #111111;
+      color: #eeeef0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 640px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand img { width: 60px; height: 60px; }
+
+    .brand h1 {
+      font-size: 4rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .purpose {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .purpose h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #93b4ff;
+    }
+
+    .purpose p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #b2b3bd;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.5rem;
+      border-radius: 0.625rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, opacity 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-primary {
+      background: #3d63dd;
+      color: #eeeef0;
+    }
+
+    .btn-secondary {
+      background: #222325;
+      color: #eeeef0;
+      border: 1px solid #303136;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #93b4ff;
+      border: 1px solid #375098;
+    }
+
+    .btn-outline:hover { background: #172448; }
+
+    .footer {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #6c6e79;
+    }
+
+    .footer a {
+      color: #93b4ff;
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="brand">
+      <img src="{{ frontend_url }}/devjobs.png" alt="DevJobs logo">
+      <h1>DevJobs</h1>
+    </div>
+
+    <div class="purpose">
+      <h2>Plataforma de empleo para el sector tecnológico</h2>
+      <p>
+        DevJobs conecta a empresas que buscan cubrir puestos de desarrollo con profesionales
+        que buscan una oportunidad acorde a su perfil. A diferencia de los portales de empleo
+        genéricos, permite filtrar ofertas laborales según la tecnología requerida y el nivel
+        de seniority del puesto.
+      </p>
+    </div>
+
+    <div class="actions">
+      <a href="{{ frontend_url }}/" class="btn btn-primary">Inicio</a>
+      <a href="{{ frontend_url }}/offers" class="btn btn-primary">Ofertas laborales</a>
+      <a href="{{ frontend_url }}/login" class="btn btn-secondary">Iniciar sesión</a>
+      <a href="{{ frontend_url }}/register" class="btn btn-outline">Registrarse</a>
+    </div>
+
+    <p class="footer">
+      API REST &mdash; <a href="/api/docs">Documentación interactiva</a>
+    </p>
+  </div>
+</body>
+</html>
